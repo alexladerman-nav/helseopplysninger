@@ -35,6 +35,7 @@ dependencies {
     implementation("io.micrometer:micrometer-registry-prometheus:1.6.6")
     implementation("io.ktor:ktor-auth:$ktorVersion")
     implementation("io.ktor:ktor-metrics-micrometer:$ktorVersion")
+    implementation("io.ktor:ktor-jackson:$ktorVersion")
     testImplementation(kotlin("test-junit5"))
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion") { exclude(group = "junit", module = "junit") }
     testImplementation("no.nav.security:mock-oauth2-server:0.3.2") { exclude(group = "junit", module = "junit") }
