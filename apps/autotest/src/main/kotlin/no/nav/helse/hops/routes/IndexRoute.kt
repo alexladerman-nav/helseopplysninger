@@ -4,7 +4,7 @@ import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import no.nav.helse.hops.auth.Auth
-import java.io.File
+import no.nav.helse.hops.utils.Fixtures
 
 fun Routing.indexRoutes() {
     val auth = Auth()
@@ -15,11 +15,11 @@ fun Routing.indexRoutes() {
         call.respondText("api")
     }
     get("/token") {
-        val token = auth.token();
+        val token = auth.token("myscope");
         call.respondText(token.toString())
     }
-    get("/bestilling"){
-        val fileContent = this.javaClass::class.java.getResource("fixtures/bestilling.json").readText()
-        call.respondText(fileContent)
+    get("/bestilling") {
+        val fileContent = Fixtures().bestillingsBundle();
+        call.respondText(fileContent.toString())
     }
 }

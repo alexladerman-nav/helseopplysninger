@@ -7,7 +7,7 @@ import no.nav.helse.hops.security.oauth.OAuth2ClientFactory
 import java.util.*
 
 class Auth {
-    val client = initClient();
+    private val client = initClient();
     private var _token: JWTClaimsSet? = null;
     private fun initClient(): IOAuth2Client {
         return OAuth2ClientFactory.create(
@@ -18,9 +18,9 @@ class Auth {
     }
 
 
-    suspend fun token(): JWTClaimsSet? {
+    suspend fun token(scope:String): JWTClaimsSet? {
         if (_token == null || _token!!.expirationTime > Date()) {
-            val rawToken = client.getToken("myscope")
+            val rawToken = client.getToken(scope)
             _token = JWTParser.parse(rawToken).jwtClaimsSet
         }
         return _token
