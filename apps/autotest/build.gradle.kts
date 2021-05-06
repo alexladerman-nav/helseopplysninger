@@ -1,6 +1,7 @@
 plugins {
     application
     kotlin("jvm")
+    kotlin("plugin.serialization") version "1.5.0"
     id("org.jlleitschuh.gradle.ktlint")
 }
 
@@ -22,6 +23,7 @@ dependencies {
     implementation("ca.uhn.hapi.fhir:org.hl7.fhir.r4:5.3.11")
     implementation("ca.uhn.hapi.fhir:hapi-fhir-base:5.3.3")
     implementation("ca.uhn.hapi.fhir:hapi-fhir-structures-r4:5.3.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0")
 
     runtimeOnly("ch.qos.logback:logback-classic:1.2.3")
     runtimeOnly("io.ktor:ktor-server-netty:$ktorVersion")

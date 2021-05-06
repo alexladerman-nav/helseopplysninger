@@ -1,6 +1,5 @@
 package no.nav.helse.hops
 
-
 import io.ktor.http.*
 import no.nav.helse.hops.utils.urlReturnsStatusCode
 import org.junit.jupiter.api.Test
@@ -17,7 +16,14 @@ class ApplicationTest {
 
     @Test
     fun `Requests should be 200`() {
-        val url = URL("https://ktor.io/")
+        val url = Url("https://ktor.io/")
+        val result = urlReturnsStatusCode(url, 200);
+        assertEquals(result, true)
+    }
+
+    @Test
+    fun `All services should respond 200`() {
+        val url = Url("https://ktor.io/")
         val result = urlReturnsStatusCode(url, 200);
         assertEquals(result, true)
     }
