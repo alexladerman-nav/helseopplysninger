@@ -3,6 +3,8 @@ package no.nav.helse.hops.utils
 
 import ca.uhn.fhir.context.FhirContext
 import org.hl7.fhir.r4.model.Bundle
+import java.io.File
+import io.github.cdimascio.dotenv.dotenv
 
 
 class Fixtures {
@@ -14,3 +16,12 @@ class Fixtures {
     }
 }
 
+fun dockerEnvVars () {
+    val fileName = "autotest.env"
+    val content = File(fileName).readText();
+    val dotenv = dotenv {
+        filename = fileName
+    }
+    println(content)
+    println( dotenv["DB_PORT"])
+}

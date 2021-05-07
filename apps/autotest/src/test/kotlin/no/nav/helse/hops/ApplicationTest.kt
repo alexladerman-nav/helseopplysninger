@@ -1,10 +1,15 @@
 package no.nav.helse.hops
 
+import ca.uhn.fhir.context.FhirContext
 import io.ktor.http.*
+import no.nav.helse.hops.fhir.createFhirMessage
+import no.nav.helse.hops.fhir.toJson
+import no.nav.helse.hops.utils.dockerEnvVars
 import no.nav.helse.hops.utils.urlReturnsStatusCode
 import org.junit.jupiter.api.Test
 import java.net.URL
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class ApplicationTest {
 
@@ -26,5 +31,20 @@ class ApplicationTest {
         val url = Url("https://ktor.io/")
         val result = urlReturnsStatusCode(url, 200);
         assertEquals(result, true)
+    }
+
+    @Test
+    fun `Should create FHIR-message`() {
+        val jsonbundle = createFhirMessage().toJson();
+        assertTrue(jsonbundle.startsWith("{"))
+        assertTrue(jsonbundle.endsWith("}"))
+        assertTrue(jsonbundle.contains("Bundle"))
+    }
+
+    @Test
+    fun `Should read env-files`() {
+        val content = dockerEnvVars()
+
+        assertTrue(true)
     }
 }
